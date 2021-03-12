@@ -1,0 +1,33 @@
+{
+  "name": "z-golly/opcache",
+  "description": "php opcache",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "jonathan",
+      "email": "jianyang1209@outlook.com"
+    }
+  ],
+  "require": {
+    "php": "^7.2|^7.3|^7.4|^8.0",
+    "laravel/framework": "^7.0|^8.0"
+  },
+  "require-dev": {},
+  "autoload": {
+    "psr-4": {
+      "Golly\\Opcache\\": "src/"
+    }
+  },
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Golly\\Opcache\\OpcacheServiceProvider"
+      ]
+    }
+  },
+  "config": {
+    "sort-packages": true
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true
+}
