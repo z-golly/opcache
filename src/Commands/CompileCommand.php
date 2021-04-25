@@ -48,7 +48,7 @@ class CompileCommand extends Command
                     $response['result']['compiled_count'],
                     $response['result']['files_count']
                 ));
-                foreach ($response['result']['not_compiled_files'] as $error) {
+                foreach ($response['result']['compiled_errors'] as $error) {
                     $this->error($error);
                 }
 

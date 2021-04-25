@@ -65,7 +65,7 @@ class OpcacheService
         }
 
         $count = $compiled = 0;
-        $notCompiledFiles = [];
+        $compiledErrors = [];
         if (function_exists('opcache_compile_file')) {
             // Get files in these paths
             $files = Finder::create()
@@ -85,7 +85,7 @@ class OpcacheService
                     }
                     $compiled++;
                 } catch (Throwable $e) {
-                    $notCompiledFiles[] = $file . ':' . $e->getMessage();
+                    $compiledErrors[] = $e->getMessage();
                 }
             }
         }
@@ -93,7 +93,7 @@ class OpcacheService
         return [
             'files_count' => $count,
             'compiled_count' => $compiled,
-            'not_compiled_files' => $notCompiledFiles
+            'compiled_errors' => $compiledErrors
         ];
     }
 }
