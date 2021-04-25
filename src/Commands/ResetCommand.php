@@ -9,10 +9,10 @@ use Illuminate\Console\Command;
 use Illuminate\Http\Client\RequestException;
 
 /**
- * Class ClearCommand
- * @package Golly\OpcacheService\Commands
+ * Class ResetCommand
+ * @package Golly\Opcache\Commands
  */
-class ClearCommand extends Command
+class ResetCommand extends Command
 {
     use Client;
 
@@ -21,23 +21,24 @@ class ClearCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'opcache:clear';
+    protected $signature = 'opcache:reset';
 
     /**
      * @var string
      */
-    protected $description = 'Clear opcache';
+    protected $description = 'Reset opcache';
 
     /**
+     * @return int
      * @throws RequestException
      */
     public function handle()
     {
-        $response = $this->get('/api/opcache/clear');
+        $response = $this->get('/api/opcache/reset');
         $response->throw();
 
         if ($response->json('result')) {
-            $this->info('Opcache cleared success!');
+            $this->info('Opcache reset success!');
             return 0;
         } else {
             $this->error('Opcache not configured!');

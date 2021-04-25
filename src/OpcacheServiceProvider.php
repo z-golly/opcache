@@ -4,7 +4,7 @@
 namespace Golly\Opcache;
 
 
-use Golly\Opcache\Commands\ClearCommand;
+use Golly\Opcache\Commands\ResetCommand;
 use Golly\Opcache\Commands\CompileCommand;
 use Golly\Opcache\Commands\ConfigCommand;
 use Golly\Opcache\Commands\StatusCommand;
@@ -24,13 +24,15 @@ class OpcacheServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->configurePublishing();
-        $this->commands([
-            ClearCommand::class,
-            CompileCommand::class,
-            ConfigCommand::class,
-            StatusCommand::class
-        ]);
+        if ($this->app->runningInConsole()) {
+            $this->configurePublishing();
+            $this->commands([
+                ResetCommand::class,
+                CompileCommand::class,
+                ConfigCommand::class,
+                StatusCommand::class
+            ]);
+        }
     }
 
     /**
@@ -50,11 +52,9 @@ class OpcacheServiceProvider extends ServiceProvider
      */
     protected function configurePublishing()
     {
-        if ($this->app->runningInConsole()) {
-            $this->publishes([
-                __DIR__ . '/../config/opcache.php' => config_path('opcache.php'),
-            ], 'opcache-config');
-        }
+        $this->publishes([
+            __DIR__ . '/../config/opcache.php' => config_path('opcache.php'),
+        ], 'opcache-config');
     }
 
 

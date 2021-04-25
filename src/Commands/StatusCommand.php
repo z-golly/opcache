@@ -9,8 +9,8 @@ use Illuminate\Console\Command;
 use Illuminate\Http\Client\RequestException;
 
 /**
- * Class ClearCommand
- * @package Golly\OpcacheService\Commands
+ * Class StatusCommand
+ * @package Golly\Opcache\Commands
  */
 class StatusCommand extends Command
 {
@@ -66,30 +66,30 @@ class StatusCommand extends Command
             unset($general[$target]);
         }
 
-        $this->table([], $this->parseTable($general));
+        $this->table([], $this->toTableRows($general));
         if (isset($data['memory_usage'])) {
             $this->line('memory usage:');
-            $this->table([], $this->parseTable($data['memory_usage']));
+            $this->table([], $this->toTableRows($data['memory_usage']));
         }
 
         if (isset($data['opcache_statistics'])) {
             $this->line('statistics:');
-            $this->table([], $this->parseTable($data['opcache_statistics']));
+            $this->table([], $this->toTableRows($data['opcache_statistics']));
         }
 
         if (isset($data['interned_strings_usage'])) {
             $this->line('interned strings usage:');
-            $this->table([], $this->parseTable($data['interned_strings_usage']));
+            $this->table([], $this->toTableRows($data['interned_strings_usage']));
         }
 
         if (isset($data['preload_statistics'])) {
             $this->line('preload statistics:');
-            $this->table([], $this->parseTable($data['preload_statistics']));
+            $this->table([], $this->toTableRows($data['preload_statistics']));
         }
 
         if (isset($data['jit'])) {
             $this->line('jit:');
-            $this->table([], $this->parseTable($data['jit']));
+            $this->table([], $this->toTableRows($data['jit']));
         }
     }
 
@@ -100,7 +100,7 @@ class StatusCommand extends Command
      *
      * @return array
      */
-    protected function parseTable($input)
+    protected function toTableRows($input)
     {
         $input = (array)$input;
         $bytes = ['used_memory', 'free_memory', 'wasted_memory', 'buffer_size'];

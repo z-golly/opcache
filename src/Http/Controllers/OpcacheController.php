@@ -15,13 +15,13 @@ use Illuminate\Routing\Controller;
 class OpcacheController extends Controller
 {
     /**
-     * Clear the OPcache.
+     * Reset the opcache.
      *
      * @return JsonResponse
      */
-    public function clear()
+    public function reset()
     {
-        return response()->json(['result' => OpcacheService::clear()]);
+        return response()->json(['result' => OpcacheService::reset()]);
     }
 
     /**

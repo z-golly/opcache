@@ -39,7 +39,6 @@ class CompileCommand extends Command
         $response->throw();
 
         if ($result = $response->json('result')) {
-            dd($result);
             if (isset($result['message'])) {
                 $this->warn($result['message']);
                 return 1;

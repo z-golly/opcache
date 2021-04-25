@@ -17,7 +17,7 @@ class OpcacheService
     /**
      * @return bool
      */
-    public static function clear()
+    public static function reset()
     {
         $result = false;
         if (function_exists('opcache_reset')) {
@@ -63,6 +63,7 @@ class OpcacheService
         if (!ini_get('opcache.dups_fix') && !$force) {
             return ['message' => 'opcache.dups_fix must be enabled, or run with --force'];
         }
+
         $count = $compiled = 0;
         if (function_exists('opcache_compile_file')) {
             // Get files in these paths
