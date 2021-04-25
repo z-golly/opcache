@@ -10,11 +10,11 @@
     ],
     "require": {
         "php": "^7.4|^8.0",
+        "ext-zend-opcache": "*",
         "laravel/framework": "^7.0|^8.0",
         "symfony/finder": "^5.2"
     },
     "require-dev": {
-        "ext-zend-opcache": "*"
     },
     "autoload": {
         "psr-4": {
