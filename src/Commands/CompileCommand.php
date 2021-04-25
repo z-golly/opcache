@@ -46,8 +46,12 @@ class CompileCommand extends Command
                 $this->info(sprintf(
                     '%s of %s files compiled',
                     $response['result']['compiled_count'],
-                    $response['result']['total_files_count']
+                    $response['result']['files_count']
                 ));
+                foreach ($response['result']['not_compiled_files'] as $error) {
+                    $this->error($error);
+                }
+
                 return 0;
             }
 
