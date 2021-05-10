@@ -55,55 +55,7 @@ class OpcacheMiddleware
      */
     protected function isAllowedIp(Request $request)
     {
-        return in_array($this->getRequestIp($request), [
-            $this->getServerIp(),
-            '127.0.0.1',
-            '::1'
-        ]);
-    }
-
-    /**
-     * Get ip from different request headers.
-     *
-     * @param Request $request
-     * @return array|string|null
-     */
-    protected function getRequestIp(Request $request)
-    {
-        if ($request->server('HTTP_CF_CONNECTING_IP')) {
-            // cloudflare
-            return $request->server('HTTP_CF_CONNECTING_IP');
-        }
-
-        if ($request->server('X_FORWARDED_FOR')) {
-            // forwarded proxy
-            return $request->server('X_FORWARDED_FOR');
-        }
-
-        if ($request->server('REMOTE_ADDR')) {
-            // remote header
-            return $request->server('REMOTE_ADDR');
-        }
-
-        return $request->ip();
-    }
-
-    /**
-     * Get the server ip.
-     *
-     * @return string
-     */
-    protected function getServerIp()
-    {
-        if (isset($_SERVER['SERVER_ADDR'])) {
-            return $_SERVER['SERVER_ADDR'];
-        }
-
-        if (isset($_SERVER['LOCAL_ADDR'])) {
-            return $_SERVER['LOCAL_ADDR'];
-        }
-
-        return '127.0.0.1';
+        return true;
     }
 
 }
